@@ -37,6 +37,7 @@ class Program
 
 
                     // TODO  Create a List<Book> to store the books
+                    List<Book> books = new List<Book>();
 
 
                     // Inside the foreach loop:
@@ -72,12 +73,17 @@ class Program
                         }
 
                         //TODO Now you can use these values to create a Book object
+                        books.Add(new Book(title, priceText, rating, availability, imageUrl));
 
                         //TODO Add book to list                        
 
                     }
 
                     //TODO - Display book info
+                    foreach (var book in books)
+                    {
+                        Console.WriteLine(book);
+                    }
 
                     // TODO Bonus: Add these features:
                     // - Filter books under £20
@@ -99,12 +105,20 @@ class Program
     public class Book
     {
         public string Title { get; set; }
-        public decimal Price { get; set; }
+        public string Price { get; set; }
         public int Rating { get; set; }
         public string Availability { get; set; }
         public string ImageUrl { get; set; }
 
         // TODO Optional: Override ToString for easy display
+        public Book(string title, string price, int rating, string availability, string imageUrl)
+        {
+            Title = title;
+            Price = price;
+            Rating = rating;
+            Availability = availability;
+            ImageUrl = imageUrl;
+        }
         public override string ToString()
         {
             return $"{Title}\n" +
@@ -122,7 +136,15 @@ class Program
     }
     private static int ConvertRating(string ratingClass)
     {
-        //TODO match pattern and return int         
-        return 1;
+        //TODO match pattern and return int
+        return ratingClass switch
+        {
+            "star-rating One" => 1,
+            "star-rating Two" => 2,
+            "star-rating Three" => 3,
+            "star-rating Four" => 4,
+            "star-rating Five" => 5,
+            _ => 0
+        };
     }
 }
